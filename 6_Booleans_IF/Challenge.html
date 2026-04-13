@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="cartManager('Show quantity')">Show quantity</button>
+    <button onclick="cartManager('+1')">+1</button>
+    <button onclick="cartManager('+2')">+2</button>
+    <button onclick="cartManager('+3')">+3</button>
+    <button onclick="cartManager('-1')">Remove from cart</button>
+    <button onclick="cartManager('-2')">-2</button>
+    <button onclick="cartManager('-3')">-3</button>
+    <button onclick="cartManager('Reset')">Reset Cart</button>
+    
+    <script>
+        let quantity = 0;
+        function check(a){
+            return (a > 10 || a < 0)
+        }
+        function cartManager(choice){
+            if(choice==='Show quantity') alert(`Quantity: ${quantity}`);
+            else if(choice==='+1'){
+                a = quantity+1
+                check(a) ? alert('The cart is full') : alert(`Quantity: ${++quantity}`);
+            }
+            else if(choice==='+2'){
+                a = quantity+2
+                check(a) ? alert('The cart is full') : (quantity += 2, alert(`Quantity: ${quantity}`))
+            }
+            else if(choice==='+3'){
+                a = quantity+3
+                check(a) ? alert('The cart is full') : (quantity += 3, alert(`Quantity: ${quantity}`))
+
+            }
+            else if(choice==='-1'){
+                a = quantity-1
+                check(a) ? alert('Not enough in the cart') : (quantity-=1, alert(`Quantity: ${quantity}`))
+            }
+            else if(choice==='-2'){
+                a = quantity-2
+                check(a) ? alert('Not enough in the cart') : (quantity-=2, alert(`Quantity: ${quantity}`))
+            }
+            else if(choice==='-3'){
+                a = quantity-3
+                check(a) ? alert('Not enough in the cart') : (quantity-=3, alert(`Quantity: ${quantity}`))
+            }
+            else if(choice==='Reset'){
+                quantity = 0
+                alert(`Cart was reset\nQuantity: ${quantity}`);
+            }
+        }
+    </script>
+</body>
+</html>

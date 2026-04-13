@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cart Quantity</title>
+</head>
+
+<body>
+    <button onclick="console.log(`Cart quantity: ${cartQuantity}`)">Show Quantity</button>
+    <button onclick="updateCartQuantity(1)">Add to Cart</button>
+    <button onclick="updateCartQuantity(2)">+2</button>
+    <button onclick="updateCartQuantity(3)">+3</button>
+    <button onclick="updateCartQuantity(4)">+4</button>
+    <button onclick="updateCartQuantity(5)">+5</button>
+    <button onclick="updateCartQuantity(-1)">Remove from cart</button>
+    <button onclick="updateCartQuantity(-2)">-2</button>
+    <button onclick="updateCartQuantity(-3)">-3</button>
+
+    <button onclick="resetCart()">Reset Cart</button>
+
+    <p class="result"></p>
+    <p class="alert"></p>
+
+    <script>
+        let cartQuantity = Number(localStorage.getItem('quantity')) || 0;
+        const resultElem = document.querySelector('.result');
+        const alertElem = document.querySelector('.alert');
+
+        showResult();
+
+        function updateCartQuantity(change) {
+            const newQuantity = cartQuantity + change;
+
+            if (newQuantity > 10) return showAlert('The cart is full');
+            if (newQuantity < 0) return showAlert('Not enough items in the cart');
+
+            alertElem.innerHTML = '';
+            cartQuantity = newQuantity;
+            showResult();
+        }
+
+        function resetCart() {
+            cartQuantity = 0;
+            alertElem.innerHTML = 'The cart is empty';
+            showResult();
+            console.log('Cart was reset.');
+        }
+
+        function showResult() {
+            resultElem.innerHTML = `Cart quantity: ${cartQuantity}`;
+            localStorage.setItem('quantity', cartQuantity.toString());
+        }
+
+        function showAlert(msg) {
+            alertElem.innerHTML = msg;
+        }
+    </script>
+</body>
+
+</html>

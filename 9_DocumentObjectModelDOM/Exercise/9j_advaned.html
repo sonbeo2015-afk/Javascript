@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Calculator with Keyboard Support</title>
+</head>
+
+<body>
+    <p class="cal" style="height: 20px;"></p>
+
+    <p>
+        <button onclick="updateCalculation('1')">1</button>
+        <button onclick="updateCalculation('2')">2</button>
+        <button onclick="updateCalculation('3')">3</button>
+        <button onclick="updateCalculation(' + ')">+</button>
+    </p>
+    <p>
+        <button onclick="updateCalculation('4')">4</button>
+        <button onclick="updateCalculation('5')">5</button>
+        <button onclick="updateCalculation('6')">6</button>
+        <button onclick="updateCalculation(' - ')">-</button>
+    </p>
+    <p>
+        <button onclick="updateCalculation('7')">7</button>
+        <button onclick="updateCalculation('8')">8</button>
+        <button onclick="updateCalculation('9')">9</button>
+        <button onclick="updateCalculation(' * ')">*</button>
+    </p>
+    <p>
+        <button onclick="updateCalculation('0')">0</button>
+        <button onclick="updateCalculation('.')">.</button>
+        <button onclick="calculateResult()">=</button>
+        <button onclick="updateCalculation(' / ')">/</button>
+    </p>
+    <p>
+        <button onclick="clearCalculation()">Clear</button>
+    </p>
+
+    <script>
+        let calculation = localStorage.getItem('calculation') || '';
+        showCal();
+
+        // 1. Hàm cập nhật con số/toán tử
+        function updateCalculation(value) {
+            calculation += value;
+            saveAndShow();
+        }
+
+        // 2. Hàm tính kết quả (Dùng cho cả dấu = và phím Enter)
+        function calculateResult() {
+            if (!calculation) return; // Nếu trống thì không làm gì
+            try {
+                calculation = eval(calculation);
+                calculation = parseFloat(calculation.toFixed(10)).toString();
+                saveAndShow();
+            } catch (e) {
+                alert("Phép tính không hợp lệ!");
+                clearCalculation();
+            }
+        }
+
+        // 3. Hàm xóa sạch
+        function clearCalculation() {
+            calculation = '';
+            saveAndShow();
+        }
+
+        // 4. Hàm hiển thị và lưu (Dùng chung để tránh lặp code)
+        function saveAndShow() {
+            console.log(calculation);
+            localStorage.setItem('calculation', calculation);
+            showCal();
+        }
+
+        function showCal() {
+            document.querySelector('.cal').innerHTML = calculation;
+        }
+
+        // 5. LẮNG NGHE BÀN PHÍM
+        window.addEventListener('keydown', (event) => {
+            const key = event.key;
+
+            if ((key >= '0' && key <= '9') || key === '.') {
+                updateCalculation(key);
+            } else if (key === '+') {
+                updateCalculation(' + ');
+            } else if (key === '-') {
+                updateCalculation(' - ');
+            } else if (key === '*') {
+                updateCalculation(' * ');
+            } else if (key === '/') {
+                updateCalculation(' / ');
+            } else if (key === 'Enter') {
+                calculateResult();
+            } else if (key === 'Escape') {
+                clearCalculation();
+            } else if (key === 'Backspace') {
+                // Xóa ký tự cuối (xử lý thêm khoảng trắng nếu là toán tử)
+                calculation = calculation.trim().slice(0, -1);
+                saveAndShow();
+            }
+        });
+    </script>
+</body>
+
+</html>

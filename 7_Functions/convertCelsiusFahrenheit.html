@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input type="number" id="temp">
+        <button onclick="convertTemp('CtoF')">Celsius to Fahrenheit</button>
+        <button onclick="convertTemp('FtoC')">Fahrenheit to Celsius</button>
+    </div>
+    <div>
+        <input type="number" id="res">
+    </div>
+    <script>
+        function CtoF(Temp){
+            return (Temp*9/5)+32
+        }
+        function FtoC(Temp){
+            return (Temp-32)*5/9
+        }
+        function convertTemp(choice){
+            let temp = Number(document.getElementById('temp').value)
+            let output = document.getElementById('res')
+            let result = choice === "CtoF" ? CtoF(temp) : FtoC(temp)
+            output.value = result.toFixed(2);
+        }
+    </script>
+</body>
+</html>

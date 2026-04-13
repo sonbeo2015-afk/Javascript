@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>9a</button>
+    <button class="b">9b</button>
+
+    <hr>
+
+    <button onclick="chosen('heads')">heads</button>
+    <button onclick="chosen('tails')">tails</button>
+    <p class="chosen"></p>
+
+    <hr>
+
+    <input type="text" placeholder="Name" class="name-input" onkeypress="
+    if(event.key === 'Enter') nameinput()">
+    <button onclick="nameinput()">Submit</button>
+    <p class="name-text"></p>
+
+    <script>
+        console.log(document.querySelector('button'));
+        document.querySelector('.b').innerHTML = '9b done!';
+
+        function chosen(choice) {
+            const ref = document.querySelector('.chosen');
+            ref.innerHTML = choice === 'heads' ? 'You chose: heads' : 'You chose: tails';
+        }
+
+        function nameinput() {
+            const ref = document.querySelector('.name-input');
+            document.querySelector('.name-text').innerHTML = `Your name is: ${ref.value}`;
+        }
+    </script>
+</body>
+
+</html>

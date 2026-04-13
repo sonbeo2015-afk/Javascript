@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="cal('+1')">+1</button>
+    <button onclick="cal('+2')">
+        +2
+    </button>
+    <button onclick="cal('+3')">
+        +3
+    </button >
+    <button onclick="cal('r')">
+        Reset
+    </button >
+    <script>
+        let result = parseInt(localStorage.getItem('result')) || 0;
+        function cal(action){
+            if(action === '+1') result+=1;
+            else if(action === '+2') result+=2;
+            else if(action === '+3') result+=3;
+            else if(action === 'r') result=0;
+            localStorage.setItem('result', result.toString());
+            alert(result);
+        }
+    </script>
+</body>
+</html>
