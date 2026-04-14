@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: white;
+            color: black;
+        }
+
+        .dark-mode {
+            color: white;
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="btn-change-mode" onclick="changeMode()"></button>
+    <script>
+        let mode = localStorage.getItem("mode") || 'light';
+        const bd = document.querySelector("body");
+        changeBackground();
+
+        function changeMode() {
+            if (mode === 'light') mode = 'dark';
+            else mode = 'light';
+            saveToStorage();
+            changeBackground();
+        }
+
+        function changeBackground() {
+            if (mode === 'dark') {
+                bd.classList.add("dark-mode");
+                document.querySelector(".btn-change-mode").innerHTML = 'Bật chế độ sáng';
+            } else {
+                bd.classList.remove("dark-mode");
+                document.querySelector(".btn-change-mode").innerHTML = 'Bật chế độ tối';
+            }
+        }
+
+        function saveToStorage() {
+            localStorage.setItem("mode", mode);
+        }
+    </script>
+</body>
+
+</html>

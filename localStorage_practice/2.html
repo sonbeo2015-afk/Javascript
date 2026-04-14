@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: white;
+            color: black;
+        }
+
+        .dark-mode {
+            color: white;
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="changeMode()">Change mode</button>
+    <p class="mode"></p>
+    <script>
+        let mode = localStorage.getItem('mode') || 'light';
+
+        document.querySelector(".mode").innerHTML = mode;
+
+        changeBackground();
+
+        function changeMode() {
+            const bd = document.body;
+            if (bd.classList.contains("dark-mode")) {
+                mode = 'light';
+            } else {
+                mode = 'dark';
+            }
+
+            changeBackground();
+            saveToStorage();
+            document.querySelector(".mode").innerHTML = mode;
+        }
+
+        function changeBackground() {
+            const bd = document.body;
+            if (mode === 'dark') {
+                bd.classList.add("dark-mode");
+            } else {
+                bd.classList.remove("dark-mode");
+            }
+        }
+
+        function saveToStorage() {
+            localStorage.setItem('mode', mode);
+        }
+    </script>
+</body>
+
+</html>

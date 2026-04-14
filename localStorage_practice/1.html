@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input class="textbox" type="text">
+    <button onclick="save()">Save</button>
+    <button onclick="del()">Delete</button>
+    <p class="result-p"></p>
+    <script>
+        let result = localStorage.getItem('result') || '"Rỗng"';
+        showResult();
+
+        function save() {
+            result = document.querySelector('.textbox').value;
+            saveToStorage();
+            document.querySelector('.textbox').value = "";
+            showResult();
+        }
+
+        function del() {
+            localStorage.removeItem('result');
+            document.querySelector('.textbox').value = "";
+            showResult();
+        }
+
+        function showResult() {
+            const dataDisplay = localStorage.getItem('result') || '"Rỗng"';
+            document.querySelector('.result-p').innerHTML = dataDisplay;
+        }
+
+        function saveToStorage() {
+            localStorage.setItem('result', result);
+        }
+    </script>
+</body>
+
+</html>

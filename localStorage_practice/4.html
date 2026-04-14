@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" name="" class="name" placeholder="name">
+    <input type="text" name="" class="price" placeholder="price">
+    <button class="add-to-list" onclick="Add()">Thêm</button>
+    <button class="reset-list" onclick="Reset()">Reset</button>
+    <p class="show"></p>
+    <script>
+        let productList = JSON.parse(localStorage.getItem("productList")) || [];
+
+        Show();
+
+        function Add() {
+            const nameInput = document.querySelector(".name");
+            const priceInput = document.querySelector(".price");
+            const name = nameInput.value;
+            const price = priceInput.value;
+
+            if (!name || !price) return alert("Nhập đủ thông tin!");
+
+            productList.push({
+                name,
+                price
+            });
+            saveToStorage();
+
+            nameInput.value = "";
+            priceInput.value = "";
+            Show();
+        }
+
+        function Show() {
+            document.querySelector(".show").innerHTML = JSON.stringify(productList, null, 2);
+        }
+
+        function Reset() {
+            localStorage.removeItem("productList");
+            productList = [];
+            Show();
+        }
+
+        function saveToStorage() {
+            localStorage.setItem("productList", JSON.stringify(productList));
+        }
+    </script>
+</body>
+
+</html>
