@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+  <head>
+    <title>DOM Projects</title>
+    <style>
+      .subscribe-button {
+        border: none;
+        background-color: black;
+        color: white;
+        padding: 1rem;
+        font-weight: bold;
+        border-radius: 100px;
+        cursor: pointer;
+      }
+      .is-subscribed {
+        background-color: rgba(128, 128, 128, 0.3);
+        color: black;
+      }
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .cost-input {
+        font-size: 1rem;
+        padding: 0.5rem;
+      }
+      .calculate-button {
+        background-color: green;
+        color: white;
+        padding: 0.5rem;
+        font-size: 1rem;
+        border: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <p>YouTube Subscribe Button</p>
+    <button onclick="subscribe()" class="js-subscribe-button subscribe-button">
+      Subscribe
+    </button>
+    <hr />
+    <p>Amazon Shipping Calculator</p>
+    <p>Orders under $40 -> add $10 shipping</p>
+    <p>Orders over $40 -> free shipping</p>
+    <input
+      class="js-cost-input cost-input"
+      onkeydown="
+        if (event.key === 'Enter') {
+          shipping();
+        }
+      "
+      type="number"
+      placeholder="Cost of order"
+      class="orderCost"
+    />
+    <button class="calculate-button" onclick="shipping()">Calculate</button>
+    <p class="shipping-fee"></p>
+    <script>
+      function subscribe() {
+        let buttonElement = document.querySelector(".js-subscribe-button");
+        buttonElement.innerHTML === "Subscribe"
+          ? ((buttonElement.innerHTML = "Subscribed"),
+            buttonElement.classList.add("is-subscribed"))
+          : ((buttonElement.innerHTML = "Subscribe"),
+            buttonElement.classList.remove("is-subscribed"));
+      }
+
+      function shipping() {
+        const orderCost = document.querySelector(".js-cost-input").value;
+        const totalCost = document.querySelector(".shipping-fee");
+        parseFloat(orderCost) < 40
+          ? (totalCost.innerHTML =
+              "$" + (parseFloat(orderCost) + 10).toString())
+          : (totalCost.innerHTML = "$" + parseFloat(orderCost).toString());
+      }
+    </script>
+  </body>
+</html>
