@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Create a new to do</h1>
+    <input type="text" name="" id="name">
+    <button id="submitBtn">submit</button>
+    <table border="1" id="todo">
+        <thead>
+            <th>id</th>
+            <th>Name</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <script>
+        const nameInput = document.getElementById("name");
+        const submitBtn = document.getElementById("submitBtn");
+        const todoTableBody = document.querySelector("#todo tbody"); // Đặt tên rõ ràng
+
+        let todo = JSON.parse(localStorage.getItem("todo")) || [];
+
+        const render = () => {
+            let html = "";
+            todo.forEach((item, index) => {
+                html += `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${item.name}</td>
+                    <td><button onclick="deleteTodo(${index})">Xóa</button></td>
+                </tr>`;
+            });
+            todoTableBody.innerHTML = html;
+        }
+
+        const saveToStorage = () => {
+            localStorage.setItem("todo", JSON.stringify(todo));
+        }
+
+        const handleAddTodo = () => {
+            if (nameInput.value.trim() === "") return;
+            todo.push({
+                id: Date.now(),
+                name: nameInput.value
+            });
+            nameInput.value = "";
+            saveToStorage();
+            render();
+        }
+
+        window.deleteTodo = (index) => {
+            todo.splice(index, 1);
+            saveToStorage();
+            render();
+        }
+
+        submitBtn.addEventListener("click", handleAddTodo);
+        nameInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") handleAddTodo();
+        });
+        render();
+    </script>
+</body>
+
+</html>

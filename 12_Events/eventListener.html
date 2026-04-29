@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .warning {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn">click me</button>
+    <button id="myBtn">Change text</button>
+    <button id="myBack">Change color</button>
+    <h1 id="mytext">Text</h1>
+    <script>
+        const element = document.getElementById("btn");
+        const myBtnElemment = document.getElementById("myBtn");
+        const myTextElement = document.getElementById("mytext");
+        const handleClickbtn = () => {
+            console.log("You click button");
+            myTextElement.classList.remove("warning");
+            myTextElement.innerHTML = "Just the content"
+        }
+        myBtnElemment.addEventListener("click", handleClickbtn)
+        const myBackElement = document.getElementById("myBack");
+        myBackElement.addEventListener("click", () => {
+            myTextElement.classList.add("warning");
+        });
+    </script>
+</body>
+
+</html>

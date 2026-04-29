@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const ages = [10, 20, 0, 25, 12, 19];
+        const ageX2 = ages.map((value, index) => {
+            return value * 2;
+        });
+        const ageGreaterThan18 = ages.filter((value, index) => {
+            return value > 18;
+        });
+        console.log(ages);
+        console.log(ageX2);
+        console.log(ageGreaterThan18);
+    </script>
+</body>
+
+</html>
